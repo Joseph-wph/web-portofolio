@@ -1,3 +1,6 @@
+'use client';
+
+import { motion } from 'motion/react';
 import { Check, X } from 'lucide-react';
 import { cn } from '../../../lib/utils';
 import {
@@ -71,54 +74,71 @@ export default function MoreThanPart() {
   return (
     <div className='w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 p-4'>
       {comparisonData.map((column) => (
-        <Card
+        <motion.div
           key={column.id}
-          className={cn(
-            'border-none rounded-3xl p-6 sm:p-8 transition-all duration-300 shadow-none',
-            column.isHighlight
-              ? 'bg-[#EBB456] text-slate-900'
-              : 'bg-white border border-slate-200 text-slate-900 shadow-sm'
-          )}
+          initial={{
+            x: column.id === 'with-me' ? -80 : 80,
+            opacity: 0,
+          }}
+          whileInView={{
+            x: 0,
+            opacity: 1,
+          }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{
+            duration: 0.8,
+            ease: 'easeOut',
+          }}
         >
-          <CardHeader className='flex flex-col items-center p-0 mb-8 space-y-4'>
-            <CardTitle className='text-xl sm:text-2xl font-bold tracking-tight text-center'>
-              {column.title}
-            </CardTitle>
+          <Card
+            className={cn(
+              'border-none rounded-3xl p-6 sm:p-8 transition-all duration-300 shadow-none',
+              column.isHighlight
+                ? 'bg-[#EBB456] text-slate-900'
+                : 'bg-white border border-slate-200 text-slate-900 shadow-sm'
+            )}
+          >
+            <CardHeader className='flex flex-col items-center p-0 mb-8 space-y-4'>
+              <CardTitle className='text-xl sm:text-2xl font-bold tracking-tight text-center'>
+                {column.title}
+              </CardTitle>
 
-            <Avatar className='w-24 h-24 border-2 border-white/20 shadow-sm'>
-              {column.avatar.src && (
-                <AvatarImage
-                  src={column.avatar.src}
-                  alt={column.avatar.alt}
-                  className='object-cover'
-                />
-              )}
-              <AvatarFallback className='bg-slate-200 text-slate-500 font-semibold text-xl'>
-                {column.avatar.fallback}
-              </AvatarFallback>
-            </Avatar>
-          </CardHeader>
+              <Avatar className='w-24 h-24 border-2 border-white/20 shadow-sm'>
+                {column.avatar.src && (
+                  <AvatarImage
+                    src={column.avatar.src}
+                    alt={column.avatar.alt}
+                    className='object-cover'
+                  />
+                )}
+                <AvatarFallback className='bg-slate-200 text-slate-500 font-semibold text-xl'>
+                  {column.avatar.fallback}
+                </AvatarFallback>
+              </Avatar>
+            </CardHeader>
 
-          <CardContent className='p-0'>
-            <ul className='space-y-4 flex flex-col items-center'>
-              {column.points.map((point, index) => (
-                <li
-                  key={index}
-                  className='flex items-center gap-2.5 text-center justify-center'
-                >
-                  {point.isSupported ? (
-                    <Check className='w-5 h-5 stroke-[2.5] text-slate-900 shrink-0' />
-                  ) : (
-                    <X className='w-5 h-5 stroke-[2.5] text-rose-500 shrink-0' />
-                  )}
-                  <span className='font-semibold text-sm sm:text-base'>
-                    {point.text}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
+            <CardContent className='p-0'>
+              <ul className='space-y-4 flex flex-col items-center'>
+                {column.points.map((point, index) => (
+                  <li
+                    key={index}
+                    className='flex items-center gap-2.5 text-center justify-center'
+                  >
+                    {point.isSupported ? (
+                      <Check className='w-5 h-5 stroke-[2.5] text-slate-900 shrink-0' />
+                    ) : (
+                      <X className='w-5 h-5 stroke-[2.5] text-rose-500 shrink-0' />
+                    )}
+
+                    <span className='font-semibold text-sm sm:text-base'>
+                      {point.text}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        </motion.div>
       ))}
     </div>
   );

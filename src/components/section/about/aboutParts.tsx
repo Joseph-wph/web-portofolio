@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { motion } from 'motion/react';
 import { cn } from '../../../lib/utils';
 
 type AboutPartItem = {
@@ -32,8 +35,21 @@ export default function AboutPart() {
   return (
     <div className='grid grid-cols-1 gap-10 py-30 md:grid-cols-3 md:gap-20'>
       {aboutParts.map((item, index) => (
-        <div
+        <motion.div
           key={item.title}
+          initial={{
+            x: index === 0 ? -80 : index === 2 ? 80 : 0,
+            opacity: 0,
+          }}
+          whileInView={{
+            x: 0,
+            opacity: 1,
+          }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{
+            duration: 0.8,
+            ease: 'easeOut',
+          }}
           className={cn(
             'flex w-full min-h-39 flex-col items-start text-left lg:w-[346.67px] lg:h-54.75',
             index !== aboutParts.length - 1 &&
@@ -53,6 +69,7 @@ export default function AboutPart() {
               />
             </div>
           </div>
+
           {/* Title */}
           <h1 className='text-[18px] lg:text-[24px] font-bold text-black'>
             {item.title}
@@ -62,7 +79,7 @@ export default function AboutPart() {
           <p className='mt-2 text-[14px] lg:text-[16px] leading-7 font-medium text-black'>
             {item.content}
           </p>
-        </div>
+        </motion.div>
       ))}
     </div>
   );

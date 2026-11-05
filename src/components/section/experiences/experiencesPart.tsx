@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { motion } from 'motion/react';
 import { Separator } from '../../ui/separator';
 
 export type ExperienceItem = {
@@ -42,32 +45,51 @@ const experiencesData: ExperienceItem[] = [
 
 export default function ExperiencesPart() {
   return (
-    <div className='w-full flex flex-col'>
+    <div className='flex w-full flex-col'>
       {experiencesData.map((item) => (
         <div key={item.id} className='w-full'>
-          {/* Garis Separator Pembatas Atas Setiap Baris */}
-          <Separator className='bg-slate-800/80 my-8' />
+          {/* Separator */}
+          <Separator className='my-8 bg-slate-800/80' />
 
-          {/* Grid Layout untuk Item Pengalaman */}
-          <div className='grid grid-cols-1 lg:grid-cols-12 gap-6 items-center'>
-            {/* Kolom 1: Periode & Role (Span 3 di Desktop) */}
-            <div className='lg:col-span-3 flex flex-col gap-1'>
-              <span className='text-xs sm:text-sm text-slate-400 font-medium'>
+          {/* Experience Grid */}
+          <div className='grid grid-cols-1 items-start gap-6 lg:grid-cols-12'>
+            {/* Kolom 1: Period & Role - From Left */}
+            <motion.div
+              initial={{ x: -80, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{
+                duration: 0.8,
+                ease: 'easeOut',
+              }}
+              className='flex flex-col gap-1 lg:col-span-3'
+            >
+              <span className='text-xs font-medium text-slate-400 sm:text-sm'>
                 {item.period}
               </span>
-              <h3 className='text-lg sm:text-xl font-bold text-white tracking-wide'>
+
+              <h3 className='text-lg font-bold tracking-wide text-white sm:text-xl'>
                 {item.role}
               </h3>
-            </div>
+            </motion.div>
 
-            {/* Kolom 2: Card Container Logo Perusahaan (Double Border Responsive Size) */}
-            <div className='lg:col-span-3 flex items-center justify-start lg:justify-center'>
-              {/* Outer Border Box: 121.71x71px di mobile, 192x112px di desktop */}
-              <div className='w-[121.71px] h-[71px] lg:w-[192px] lg:h-[112px] rounded-[18px] lg:rounded-[28px] border border-slate-800/60 p-1 lg:p-1.5 bg-[#0B0F17] shrink-0'>
-                {/* Inner Border Box: Mengisi penuh area dalam secara fleksibel */}
-                <div className='w-full h-full rounded-[14px] lg:rounded-[22px] border border-slate-800/80 bg-[#0E131F] flex items-center justify-center p-2 lg:p-4 shadow-inner'>
-                  {/* Container Logo: Menyesuaikan skala secara proporsional */}
-                  <div className='relative w-16 h-5 lg:w-28 lg:h-9'>
+            {/* Kolom 2: Company Logo - Fade In */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{
+                duration: 0.8,
+                ease: 'easeOut',
+              }}
+              className='flex items-center justify-start lg:col-span-3 lg:justify-center'
+            >
+              {/* Outer Border */}
+              <div className='h-17.75 w-[121.71px] shrink-0 rounded-[18px] border border-slate-800/60 bg-transparent p-1 lg:h-28 lg:w-48 lg:rounded-[28px] lg:p-1.5'>
+                {/* Inner Border */}
+                <div className='flex h-full w-full items-center justify-center rounded-[14px] border border-slate-800/80 bg-transparent p-2 shadow-inner lg:rounded-[22px] lg:p-4'>
+                  {/* Logo Container */}
+                  <div className='relative h-10 w-40'>
                     <Image
                       src={item.companyLogo}
                       alt={`${item.companyName} logo`}
@@ -77,14 +99,23 @@ export default function ExperiencesPart() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Kolom 3: Deskripsi Pekerjaan (Span 6 di Desktop) */}
-            <div className='lg:col-span-6'>
-              <p className='text-sm sm:text-base text-slate-400 leading-relaxed'>
+            {/* Kolom 3: Description - From Right */}
+            <motion.div
+              initial={{ x: 80, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{
+                duration: 0.8,
+                ease: 'easeOut',
+              }}
+              className='lg:col-span-6'
+            >
+              <p className='text-sm leading-relaxed text-slate-400 sm:text-base'>
                 {item.description}
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       ))}

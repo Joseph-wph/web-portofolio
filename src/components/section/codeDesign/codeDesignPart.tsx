@@ -7,7 +7,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/src/components/ui/carousel';
+} from '@/components/ui/carousel';
 
 type codeDesignPartItem = {
   image: string;
