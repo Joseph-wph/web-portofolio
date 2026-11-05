@@ -5,7 +5,7 @@ import DesignToPart from './designToPart';
 
 export default function DesignTo() {
   return (
-    <section className='w-full mx-auto py-12'>
+    <section id='projects' className='w-full mx-auto py-12'>
       <Container>
         <div className='flex flex-col gap-10'>
           {/* Header Layout (Mobile: Menumpuk ke bawah, Desktop: Sejajar kiri-kanan) */}
