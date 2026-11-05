@@ -4,7 +4,7 @@ import CodeDesignPart from './codeDesignPart';
 
 export default function CodeDesignSection() {
   return (
-    <section className='w-full mx-auto '>
+    <section id='skill' className='w-full mx-auto '>
       <Container>
         <div className='flex flex-col justify-center items-center'>
           <SectionHeader

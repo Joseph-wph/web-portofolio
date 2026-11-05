@@ -24,7 +24,10 @@ const stats = [
 
 export default function Hero() {
   return (
-    <section className='relative min-h-screen pt-20 lg:pt-15 pb-10 overflow-hidden flex flex-col justify-between'>
+    <section
+      id='home'
+      className='relative min-h-screen pt-20 lg:pt-15 pb-10 overflow-hidden flex flex-col justify-between'
+    >
       {/* Background Image */}
       <div className='absolute inset-0 -z-10'>
         <Image
