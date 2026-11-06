@@ -4,16 +4,17 @@ import CodeDesignPart from './codeDesignPart';
 
 export default function CodeDesignSection() {
   return (
-    <section id='skill' className='w-full mx-auto '>
+    <section id='skill' className='w-full min-w-0 mx-auto scroll-mt-28'>
       <Container>
-        <div className='flex flex-col justify-center items-center'>
+        <div className='flex min-w-0 flex-col items-center justify-center'>
           <SectionHeader
             title='Code, Design, and Everything in Between'
             content='These are the technologies that power my workflow and bring ideas to life.'
-            className='lg:w-223 w-90.25 py-10 gap-3 lg:gap-7'
-            titleClassName='lg:text-[40px] text-[28px] leading-10'
-            contentClassName='lg:text-[16px] text-[14px] leading-7'
+            className='w-full max-w-90.25 lg:max-w-223 py-10 gap-3 lg:gap-7 text-center'
+            titleClassName='text-[26px] leading-[1.3] font-semibold lg:text-[40px] lg:leading-[1.25]'
+            contentClassName='text-[14px] leading-6 lg:text-[16px] lg:leading-7 text-neutral-600'
           />
+
           <CodeDesignPart />
         </div>
       </Container>

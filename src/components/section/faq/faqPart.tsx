@@ -58,30 +58,29 @@ export function FaqList() {
         <AccordionItem
           key={item.id}
           value={item.id}
-          className='group border-zinc-200 py-4'
+          className='group border-zinc-200 py-3 sm:py-4'
         >
-          <AccordionTrigger className='flex items-center justify-between py-2 hover:no-underline'>
-            <div className='flex items-center gap-6 text-left sm:gap-12'>
+          <AccordionTrigger className='flex items-start justify-between gap-4 py-2 hover:no-underline sm:items-center'>
+            <div className='flex min-w-0 flex-1 items-start gap-6 text-left sm:items-center sm:gap-12'>
               {/* Numbering */}
-              <span className='w-6 shrink-0 text-base font-bold text-zinc-900 sm:text-lg'>
+              <span className='w-6 shrink-0 text-base font-bold leading-snug text-zinc-900 sm:text-lg'>
                 {item.number}
               </span>
 
               {/* Question */}
-              <span className='text-base font-bold text-zinc-900 transition-colors group-hover:text-zinc-700 sm:text-lg'>
+              <span className='min-w-0 text-base font-bold leading-snug text-zinc-900 transition-colors group-hover:text-zinc-700 sm:text-lg'>
                 {item.question}
               </span>
             </div>
 
             {/* Plus / Minus Icon */}
-            <div className='relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary-300 text-white shadow-sm transition-colors sm:h-10 sm:w-10 group-aria-expanded/accordion-trigger:bg-white group-aria-expanded/accordion-trigger:text-primary-300 group-aria-expanded/accordion-trigger:border group-aria-expanded/accordion-trigger:border-primary-300'>
-              <Plus className='absolute h-5 w-5 group-aria-expanded/accordion-trigger:hidden' />
-
-              <Minus className='absolute hidden h-5 w-5 group-aria-expanded/accordion-trigger:block' />
+            <div className='relative -mt-1.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-primary-300 text-white shadow-sm transition-colors sm:mt-0 sm:size-10 group-aria-expanded/accordion-trigger:border group-aria-expanded/accordion-trigger:border-primary-300 group-aria-expanded/accordion-trigger:bg-white group-aria-expanded/accordion-trigger:text-primary-300'>
+              <Plus className='absolute size-5 group-aria-expanded/accordion-trigger:hidden' />
+              <Minus className='absolute hidden size-5 group-aria-expanded/accordion-trigger:block' />
             </div>
           </AccordionTrigger>
 
-          <AccordionContent className='pt-2 pb-4 pr-12 pl-12 text-sm leading-relaxed text-zinc-600 sm:pl-18 sm:text-base'>
+          <AccordionContent className='pb-4 pl-12 pr-4 pt-2 text-sm leading-relaxed text-zinc-600 sm:pl-18 sm:pr-16 sm:text-base'>
             {item.answer}
           </AccordionContent>
         </AccordionItem>

@@ -16,19 +16,28 @@ export function ContactModal({ isOpen, status, onClose }: ContactModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className='w-90.25! h-95.25! md:w-129.5! md:h-2.25! !max-w-none! overflow-visible rounded-[24px] md:rounded-[28px] border-none p-0 gap-0 shadow-2xl bg-white flex flex-col'>
+      <DialogContent
+        className='
+          top-[40%]! w-[90vw] max-w-90.25! md:max-w-129.5!
+          h-auto
+          overflow-visible rounded-[24px] md:rounded-[28px]
+          border-none p-0 gap-0 shadow-2xl bg-white
+          flex flex-col
+          mt-12 md:mt-16
+        '
+      >
         <DialogTitle className='sr-only'>
           {isSuccess ? 'Pesan Berhasil Terkirim' : 'Pesan Gagal Terkirim'}
         </DialogTitle>
 
         {/* Banner Section */}
         <div
-          className={`relative h-37.5 md:h-45 w-full rounded-t-[24px] md:rounded-t-[28px] flex items-center justify-center shrink-0 ${
+          className={`relative h-37.5 md:h-45 w-full rounded-t-[24px] md:rounded-t-[28px] shrink-0 ${
             isSuccess ? 'bg-secondary' : 'bg-neutral-200'
           }`}
         >
-          {/* Envelope Image - Layer Paling Depan (z-30) */}
-          <div className='absolute -top-12 md:-top-15 left-1/2 -translate-x-1/2 z-30 w-52.5 h-52.5 md:w-65.5 md:h-65.5 flex items-center justify-center pointer-events-none'>
+          {/* Envelope Image */}
+          <div className='absolute -top-12 md:-top-15 left-1/2 -translate-x-1/2 z-30 w-52.5 h-52.5 md:w-65.5 md:h-65.5 pointer-events-none'>
             <Image
               src={
                 isSuccess
@@ -38,14 +47,14 @@ export function ContactModal({ isOpen, status, onClose }: ContactModalProps) {
               alt={isSuccess ? 'Success Mail' : 'Failed Mail'}
               width={293}
               height={293}
-              className='h-full max-w-73.25 object-contain drop-shadow-md'
+              className='h-full w-full object-contain drop-shadow-md'
               priority
             />
           </div>
         </div>
 
         {/* Content Section */}
-        <div className='relative z-10 flex flex-1 flex-col gap-8 bg-white rounded-b-[24px] md:rounded-b-[28px] px-6 md:px-8 pt-10 md:pt-15 pb-6 md:pb-8 text-center'>
+        <div className='relative z-10 flex flex-col gap-8 bg-white rounded-b-[24px] md:rounded-b-[28px] px-6 md:px-8 pt-10 md:pt-15 pb-6 md:pb-8 text-center'>
           <div>
             <h3 className='text-lg md:text-[20px] font-bold tracking-tight text-black'>
               {isSuccess ? 'Got Your Message!' : 'Message Failed to Send'}

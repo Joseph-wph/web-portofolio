@@ -1,12 +1,12 @@
 'use client';
 
 import * as React from 'react';
-import { cn } from 'cn';
+import { cn } from '@/lib/utils';
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from 'embla-carousel-react';
 
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 type CarouselApi = UseEmblaCarouselType[1];
@@ -43,7 +43,7 @@ function useCarousel() {
 }
 
 function Carousel({
-  orientation = 'horizontal',
+  orientation,
   opts,
   setApi,
   plugins,
@@ -51,18 +51,23 @@ function Carousel({
   children,
   ...props
 }: React.ComponentProps<'div'> & CarouselProps) {
+  const resolvedOrientation =
+    orientation ?? (opts?.axis === 'y' ? 'vertical' : 'horizontal');
+
   const [carouselRef, api] = useEmblaCarousel(
     {
       ...opts,
-      axis: orientation === 'horizontal' ? 'x' : 'y',
+      axis: resolvedOrientation === 'horizontal' ? 'x' : 'y',
     },
     plugins
   );
+
   const [canScrollPrev, setCanScrollPrev] = React.useState(false);
   const [canScrollNext, setCanScrollNext] = React.useState(false);
 
   const onSelect = React.useCallback((api: CarouselApi) => {
     if (!api) return;
+
     setCanScrollPrev(api.canScrollPrev());
     setCanScrollNext(api.canScrollNext());
   }, []);
@@ -90,6 +95,7 @@ function Carousel({
 
   React.useEffect(() => {
     if (!api || !setApi) return;
+
     setApi(api);
   }, [api, setApi]);
 
@@ -114,10 +120,9 @@ function Carousel({
     <CarouselContext.Provider
       value={{
         carouselRef,
-        api: api,
+        api,
         opts,
-        orientation:
-          orientation || (opts?.axis === 'y' ? 'vertical' : 'horizontal'),
+        orientation: resolvedOrientation,
         scrollPrev,
         scrollNext,
         canScrollPrev,
@@ -126,7 +131,7 @@ function Carousel({
     >
       <div
         onKeyDownCapture={handleKeyDown}
-        className={cn('relative', className)}
+        className={cn('relative min-w-0', className)}
         role='region'
         aria-roledescription='carousel'
         data-slot='carousel'
@@ -199,10 +204,10 @@ function CarouselPrevious({
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
+      aria-label='Previous slide'
       {...props}
     >
       <ArrowLeft />
-      <span className='sr-only'>Previous slide</span>
     </Button>
   );
 }
@@ -229,10 +234,10 @@ function CarouselNext({
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
+      aria-label='Next slide'
       {...props}
     >
       <ArrowRight />
-      <span className='sr-only'>Next slide</span>
     </Button>
   );
 }

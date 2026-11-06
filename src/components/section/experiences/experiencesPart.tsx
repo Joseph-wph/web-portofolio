@@ -45,23 +45,20 @@ const experiencesData: ExperienceItem[] = [
 
 export default function ExperiencesPart() {
   return (
-    <div className='flex w-full flex-col'>
+    <div className='flex w-full flex-col overflow-x-clip'>
       {experiencesData.map((item) => (
         <div key={item.id} className='w-full'>
           {/* Separator */}
-          <Separator className='my-8 bg-slate-800/80' />
+          <Separator className='my-6 bg-slate-800/80 lg:my-8' />
 
           {/* Experience Grid */}
-          <div className='grid grid-cols-1 items-start gap-6 lg:grid-cols-12'>
+          <div className='grid grid-cols-1 items-start gap-5 lg:grid-cols-12 lg:gap-6'>
             {/* Kolom 1: Period & Role - From Left */}
             <motion.div
-              initial={{ x: -80, opacity: 0 }}
+              initial={{ x: -60, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{
-                duration: 0.8,
-                ease: 'easeOut',
-              }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
               className='flex flex-col gap-1 lg:col-span-3'
             >
               <span className='text-xs font-medium text-slate-400 sm:text-sm'>
@@ -78,22 +75,20 @@ export default function ExperiencesPart() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{
-                duration: 0.8,
-                ease: 'easeOut',
-              }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
               className='flex items-center justify-start lg:col-span-3 lg:justify-center'
             >
               {/* Outer Border */}
-              <div className='h-17.75 w-[121.71px] shrink-0 rounded-[18px] border border-slate-800/60 bg-transparent p-1 lg:h-28 lg:w-48 lg:rounded-[28px] lg:p-1.5'>
+              <div className='h-17.75 w-30.5 shrink-0 rounded-[18px] border border-slate-800/60 bg-transparent p-1 lg:h-28 lg:w-48 lg:rounded-[28px] lg:p-1.5'>
                 {/* Inner Border */}
-                <div className='flex h-full w-full items-center justify-center rounded-[14px] border border-slate-800/80 bg-transparent p-2 shadow-inner lg:rounded-[22px] lg:p-4'>
+                <div className='flex size-full items-center justify-center rounded-[14px] border border-slate-800/80 bg-transparent p-2 shadow-inner lg:rounded-[22px] lg:p-4'>
                   {/* Logo Container */}
-                  <div className='relative h-10 w-40'>
+                  <div className='relative size-full'>
                     <Image
                       src={item.companyLogo}
                       alt={`${item.companyName} logo`}
                       fill
+                      sizes='(min-width: 1024px) 140px, 80px'
                       className='object-contain'
                     />
                   </div>
@@ -103,13 +98,10 @@ export default function ExperiencesPart() {
 
             {/* Kolom 3: Description - From Right */}
             <motion.div
-              initial={{ x: 80, opacity: 0 }}
+              initial={{ x: 60, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{
-                duration: 0.8,
-                ease: 'easeOut',
-              }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
               className='lg:col-span-6'
             >
               <p className='text-sm leading-relaxed text-slate-400 sm:text-base'>

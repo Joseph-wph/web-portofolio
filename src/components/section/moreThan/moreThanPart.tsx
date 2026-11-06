@@ -72,38 +72,30 @@ const comparisonData: ComparisonColumn[] = [
 
 export default function MoreThanPart() {
   return (
-    <div className='w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 p-4'>
+    <div className='mx-auto grid w-full max-w-5xl grid-cols-1 gap-6 overflow-x-clip px-4 py-4 md:grid-cols-2'>
       {comparisonData.map((column) => (
         <motion.div
           key={column.id}
-          initial={{
-            x: column.id === 'with-me' ? -80 : 80,
-            opacity: 0,
-          }}
-          whileInView={{
-            x: 0,
-            opacity: 1,
-          }}
+          className='h-full'
+          initial={{ x: column.id === 'with-me' ? -60 : 60, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{
-            duration: 0.8,
-            ease: 'easeOut',
-          }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
         >
           <Card
             className={cn(
-              'border-none rounded-3xl p-6 sm:p-8 transition-all duration-300 shadow-none',
+              'h-full rounded-3xl border p-6 text-slate-900 shadow-none transition-all duration-300 sm:p-8',
               column.isHighlight
-                ? 'bg-[#EBB456] text-slate-900'
-                : 'bg-white border border-slate-200 text-slate-900 shadow-sm'
+                ? 'border-transparent bg-[#EBB456]'
+                : 'border-slate-200 bg-white shadow-sm'
             )}
           >
-            <CardHeader className='flex flex-col items-center p-0 mb-8 space-y-4'>
-              <CardTitle className='text-xl sm:text-2xl font-bold tracking-tight text-center'>
+            <CardHeader className='mb-8 flex flex-col items-center space-y-4 p-0'>
+              <CardTitle className='text-center text-xl font-bold tracking-tight sm:text-2xl'>
                 {column.title}
               </CardTitle>
 
-              <Avatar className='w-24 h-24 border-2 border-white/20 shadow-sm'>
+              <Avatar className='size-24 border-2 border-white/20 shadow-sm'>
                 {column.avatar.src && (
                   <AvatarImage
                     src={column.avatar.src}
@@ -111,28 +103,25 @@ export default function MoreThanPart() {
                     className='object-cover'
                   />
                 )}
-                <AvatarFallback className='bg-slate-200 text-slate-500 font-semibold text-xl'>
+                <AvatarFallback className='bg-slate-200 text-xl font-semibold text-slate-500'>
                   {column.avatar.fallback}
                 </AvatarFallback>
               </Avatar>
             </CardHeader>
 
             <CardContent className='p-0'>
-              <ul className='space-y-4 flex flex-col items-center'>
-                {column.points.map((point, index) => (
+              <ul className='flex flex-col items-center gap-4'>
+                {column.points.map((point) => (
                   <li
-                    key={index}
-                    className='flex items-center gap-2.5 text-center justify-center'
+                    key={point.text}
+                    className='max-w-75 text-center text-sm font-semibold leading-snug sm:text-base'
                   >
                     {point.isSupported ? (
-                      <Check className='w-5 h-5 stroke-[2.5] text-slate-900 shrink-0' />
+                      <Check className='mr-2 -mt-0.5 inline-block size-5 stroke-[2.5] align-middle text-slate-900' />
                     ) : (
-                      <X className='w-5 h-5 stroke-[2.5] text-rose-500 shrink-0' />
+                      <X className='mr-2 -mt-0.5 inline-block size-5 stroke-[2.5] align-middle text-rose-500' />
                     )}
-
-                    <span className='font-semibold text-sm sm:text-base'>
-                      {point.text}
-                    </span>
+                    {point.text}
                   </li>
                 ))}
               </ul>

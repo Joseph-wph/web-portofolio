@@ -33,7 +33,7 @@ const aboutParts: AboutPartItem[] = [
 
 export default function AboutPart() {
   return (
-    <div className='grid grid-cols-1 gap-10 py-30 md:grid-cols-3 md:gap-20'>
+    <div className='grid w-full grid-cols-1 gap-10 py-10 md:grid-cols-3 md:gap-20'>
       {aboutParts.map((item, index) => (
         <motion.div
           key={item.title}
@@ -51,13 +51,13 @@ export default function AboutPart() {
             ease: 'easeOut',
           }}
           className={cn(
-            'flex w-full min-h-39 flex-col items-start text-left lg:w-[346.67px] lg:h-54.75',
+            'flex w-full min-w-0 flex-col items-start text-left lg:w-[346.67px] lg:min-h-54.75',
             index !== aboutParts.length - 1 &&
               'border-b border-black/20 pb-10 md:border-b-0 md:border-r md:pb-0 md:pr-8'
           )}
         >
           {/* Image Wrapper / Border */}
-          <div className='flex size-12 lg:size-15.75 items-center justify-center rounded-full border border-black/20 mb-4'>
+          <div className='mb-4 flex size-12 shrink-0 items-center justify-center rounded-full border border-black/20 lg:size-15.75'>
             {/* Image */}
             <div className='relative size-6.25 overflow-hidden rounded-full lg:size-8'>
               <Image
@@ -71,12 +71,12 @@ export default function AboutPart() {
           </div>
 
           {/* Title */}
-          <h1 className='text-[18px] lg:text-[24px] font-bold text-black'>
+          <h3 className='text-[18px] font-bold text-black lg:text-[24px]'>
             {item.title}
-          </h1>
+          </h3>
 
           {/* Content */}
-          <p className='mt-2 text-[14px] lg:text-[16px] leading-7 font-medium text-black'>
+          <p className='mt-2 text-[14px] font-medium leading-7 text-black lg:text-[16px]'>
             {item.content}
           </p>
         </motion.div>
