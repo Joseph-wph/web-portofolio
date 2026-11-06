@@ -15,22 +15,18 @@ export type StatItem = {
 // 1. Tech Stack Vertical Capsule Pill (Desktop)
 export function TechStackPill({ items }: { items: TechItem[] }) {
   return (
-    <div className='hidden lg:flex w-28.25 h-[408.43px] flex-col justify-center items-center gap-5 rounded-full border border-white/20 p-4 bg-transparent'>
+    <div className='hidden w-28.25 flex-col items-center gap-5 rounded-full border border-white/20 bg-transparent px-4 py-9 lg:flex'>
       {items.map((tech) => (
         <div
           key={tech.name}
-          className='flex h-17.25 w-17.25 items-center justify-center rounded-full border border-white/20 bg-transparent p-2.5 transition-all hover:border-white/40'
+          className='flex size-17.25 items-center justify-center rounded-full border border-white/20 bg-transparent p-2.5 transition-all hover:border-white/40'
         >
           <Image
             src={tech.icon}
             alt={tech.name}
             width={35}
             height={35}
-            style={{
-              width: 'auto',
-              height: 'auto',
-            }}
-            className='max-w-8.75 object-contain'
+            className='h-auto w-auto max-w-8.75 object-contain'
           />
         </div>
       ))}
@@ -38,19 +34,19 @@ export function TechStackPill({ items }: { items: TechItem[] }) {
   );
 }
 
-// 2. Bio Header Info
+// 2. Bio
 export function HeroBio() {
   return (
-    <div className='space-y-4 text-left lg:w-112.75 h-55.25'>
-      <div className='flex h-15.75 w-15.75 items-center justify-center rounded-full border border-white/20 bg-transparent text-white'>
-        <Mic size={30} className='fill-white/20' />
+    <div className='space-y-4 text-left lg:w-[clamp(280px,30vw,451px)] lg:translate-y-15'>
+      <div className='flex size-12 items-center justify-center rounded-full border border-white/20 bg-transparent text-white lg:size-15.75'>
+        <Mic className='size-5 fill-white/20 lg:size-7.5' />
       </div>
 
-      <h2 className='text-[16px] md:text-[20px] font-bold text-white'>
-        Hi, I`m Edwin Anderson
+      <h2 className='text-[16px] font-bold text-white md:text-[20px]'>
+        {'Hi, I’m Edwin Anderson'}
       </h2>
 
-      <p className='text-[14px] md:text-[18px] font-medium text-white/80 leading-relaxed'>
+      <p className='text-[14px] font-medium leading-7 text-white/80 md:text-[18px] lg:leading-relaxed'>
         a frontend developer passionate about creating seamless digital
         experiences that are fast, responsive, and user-friendly.
       </p>
@@ -58,30 +54,30 @@ export function HeroBio() {
   );
 }
 
-// 3. Grid Statistik & CTA Button
+// 3. Stats + CTA
 export function HeroStats({ stats }: { stats: StatItem[] }) {
   return (
-    <div className='w-90.25 lg:w-55.5 space-y-8 lg:translate-x-25 lg:translate-y-0'>
-      <div className='grid grid-cols-2 lg:grid-cols-1 gap-8 text-left'>
-        {stats.map((stat, idx) => (
+    <div className='w-full space-y-6 lg:w-55.5 lg:space-y-8 lg:translate-x-17.5'>
+      {/* Mobile: 2x2 dengan garis vertikal. Desktop: menumpuk dengan garis horizontal */}
+      <div className='grid grid-cols-2 gap-y-6 text-left lg:grid-cols-1 lg:gap-y-0'>
+        {stats.map((stat) => (
           <div
-            key={idx}
-            className='border-b border-white/10 pb-5 last:border-b-0'
+            key={stat.label}
+            className='border-white/15 max-lg:odd:border-r max-lg:even:pl-14 lg:border-b lg:py-6 lg:first:pt-0 lg:last:border-b-0 lg:last:pb-0'
           >
-            <h3 className='text-4xl lg:text-5xl font-bold text-white tracking-tight'>
+            <h3 className='text-4xl font-bold tracking-tight text-white lg:text-5xl'>
               {stat.value}
             </h3>
-            <p className='text-xs lg:text-sm font-medium text-white/80 mt-3'>
+            <p className='mt-2 text-xs font-medium text-white/80 lg:mt-3 lg:text-sm'>
               {stat.label}
             </p>
           </div>
         ))}
       </div>
 
-      {/* CTA Button menggunakan warna var(--secondary-brand) */}
-      <Button className='w-full rounded-full bg-secondary hover:brightness-105 text-black font-bold h-14 px-6 flex items-center justify-between shadow-lg transition-all cursor-pointer'>
-        <span className='text-sm md:text-base font-semibold'>Contact Me</span>
-        <span className='flex h-9 w-9 items-center justify-center rounded-full bg-black text-white'>
+      <Button className='flex h-12 w-full cursor-pointer items-center justify-between rounded-full bg-secondary px-6 font-bold text-black shadow-lg transition-all hover:brightness-105 lg:h-14'>
+        <span className='text-sm font-semibold md:text-base'>Contact Me</span>
+        <span className='flex size-9 items-center justify-center rounded-full bg-black text-white'>
           <ArrowRight size={18} />
         </span>
       </Button>
@@ -89,83 +85,95 @@ export function HeroStats({ stats }: { stats: StatItem[] }) {
   );
 }
 
-// 4. Typography Headline & Photo Wrapper
+// 4. Teks besar + foto
+function Headline({
+  outline = false,
+  strokeWidth = '0.5px',
+}: {
+  outline?: boolean;
+  strokeWidth?: string;
+}) {
+  const style = outline
+    ? {
+        WebkitTextStroke: `${strokeWidth} var(--secondary-brand)`,
+        WebkitTextFillColor: 'transparent',
+      }
+    : undefined;
+  const base =
+    'block font-heading font-normal uppercase leading-[0.95] [font-synthesis:none]';
+  const fill = outline ? '' : 'text-secondary';
+
+  return (
+    <>
+      <span
+        style={style}
+        className={`${base} ${fill} text-[28cqw] lg:text-[27cqw] ${outline ? 'invisible' : ''}`}
+      >
+        FRONTEND
+      </span>
+      <span
+        style={style}
+        className={`${base} ${fill} text-[25.2cqw] lg:text-[25cqw]`}
+      >
+        DEVELOPER
+      </span>
+    </>
+  );
+}
+
 export function HeroCenterContent() {
   return (
-    <div className='relative max-w-full flex lg:h-209 lg:w-187 flex-col items-center'>
-      {/* Available Badge */}
-      <div className='relative z-50 -top-7 lg:top-25 flex h-8 w-36.5 items-center justify-center gap-2 rounded-full border border-primary-300 bg-primary-400 px-4 py-1 lg:h-9.5 lg:w-48.75'>
-        <span className='h-2.5 w-2.5 rounded-full bg-pink-400 animate-pulse lg:h-4 lg:w-4' />
+    <div className='mx-auto flex w-full max-w-140 flex-col items-center lg:w-[clamp(460px,46vw,700px)] lg:max-w-none'>
+      {/* Badge */}
+      <div className='relative z-50 mb-4.5 flex h-8 w-36.5 items-center justify-center gap-2 rounded-full border border-primary-300 bg-primary-400 px-4 py-1 lg:mb-8.75 lg:h-9.5 lg:w-48.75 -translate-y-2.5 lg:translate-y-12.5'>
+        <span className='size-2.5 animate-pulse rounded-full bg-[#E26190] lg:size-3.5' />
         <span className='font-sans text-[10px] font-semibold text-white lg:text-[15px]'>
-          Available for hire
+          Available for Hire
         </span>
       </div>
 
-      {/* Decorative Text */}
-      <span className='absolute left-0.5 top-10 z-30 font-script text-[64.59px] font-normal tracking-wide text-white drop-shadow-md rotate-[-12.34deg] sm:left-4 sm:text-6xl lg:-left-25 lg:top-28 lg:text-[113.23px]'>
-        Junior
-      </span>
+      {/* Stage: semua ukuran di dalamnya mengikuti lebar kotak ini (cqw) */}
+      <div className='@container relative aspect-[1/1.17] w-full lg:aspect-[1/1.1]'>
+        {/* Teks isi (di belakang foto) */}
+        <h1 className='absolute inset-x-0 top-[16cqw] z-10 select-none text-center lg:top-10 lg:translate-x-0'>
+          <Headline />
+        </h1>
 
-      {/* Typography Container */}
-      <div className='relative mt-33 -top-20 lg:top-0 w-full text-center leading-24 select-none'>
-        {/* Typography Headline */}
-        <div className='relative z-10'>
-          <h1 className='font-heading text-[100px] font-black uppercase text-secondary sm:text-8xl lg:text-[187.76px]'>
-            FRONTEND
-          </h1>
-
-          <h1 className='font-heading text-[90px] font-black uppercase text-secondary sm:text-8xl lg:text-[168.82px]'>
-            DEVELOPER
-          </h1>
+        {/* Foto */}
+        <div className='pointer-events-none absolute inset-0 z-20'>
+          <div className='absolute left-1/2 -top-10 w-87.5 -translate-x-1/2 lg:top-[7cqw] lg:w-150'>
+            <Image
+              src='/assets/images/photos/photo.png'
+              alt='Profile Photo'
+              width={610}
+              height={735}
+              priority
+              sizes='(max-width: 1023px) 375px, 610px'
+              className='block h-auto w-full max-w-none'
+            />
+          </div>
         </div>
 
-        {/* Typography Outline */}
-        <div className='absolute inset-0 z-30 pointer-events-none'>
-          <h1
-            style={{
-              WebkitTextStroke: '0.5px var(--secondary)',
-              WebkitTextFillColor: 'transparent',
-            }}
-            className='font-heading text-[100px] font-medium uppercase sm:text-8xl lg:text-[187.76px] opacity-0'
-          >
-            FRONTEND
-          </h1>
-
-          <h1
-            style={{
-              WebkitTextStroke: '0.5px var(--secondary)',
-              WebkitTextFillColor: 'transparent',
-            }}
-            className='font-heading text-[90px] font-medium uppercase sm:text-8xl lg:text-[168.82px]'
-          >
-            DEVELOPER
-          </h1>
+        {/* Outline (di depan foto) */}
+        <div
+          aria-hidden='true'
+          className='pointer-events-none absolute inset-x-0 top-[16cqw] z-30 select-none text-center lg:top-10 lg:translate-x-0'
+        >
+          <Headline outline strokeWidth='0.5px' />
         </div>
-      </div>
 
-      {/* Photo Wrapper */}
-      <div className='absolute inset-0 z-20 pointer-events-none'>
-        <div className='absolute -bottom-20 left-1/2 translate-x-[-43%] w-93.75 sm:w-125 md:w-150 lg:w-152.5'>
-          <Image
-            src='/assets/images/photos/photo.png'
-            alt='Profile Photo'
-            width={610}
-            height={813}
-            priority
-            sizes='(max-width: 639px) 375px, (max-width: 1023px) 500px, 610px'
-            style={{
-              width: '100%',
-              height: 'auto',
-            }}
-            className='block max-w-none'
-          />
+        {/* "Junior" */}
+        <span className='absolute left-[2cqw] top-[11cqw] z-30 rotate-[-12.34deg] font-script text-[15cqw] font-normal leading-none tracking-wide text-white drop-shadow-md lg:left-[-11cqw] lg:top-[-3cqw]'>
+          Junior
+        </span>
+
+        {/* Scroll indicator */}
+        <div className='absolute bottom-6 left-1/2 z-40 flex -translate-x-1/2 items-center gap-1 text-white/70 lg:bottom-24'>
+          <span className='whitespace-nowrap text-xs font-medium'>
+            Scroll Down
+          </span>
+          <Mouse size={20} className='animate-bounce' />
         </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className='absolute -bottom-10 z-40 flex items-center justify-center gap-1 text-white/70 lg:-bottom-10'>
-        <span className='text-xs font-medium'>Scroll Down</span>
-        <Mouse size={20} className='animate-bounce' />
       </div>
     </div>
   );

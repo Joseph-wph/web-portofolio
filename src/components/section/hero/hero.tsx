@@ -26,7 +26,7 @@ export default function Hero() {
   return (
     <section
       id='home'
-      className='relative min-h-screen pt-20 lg:pt-15 pb-10 overflow-hidden flex flex-col justify-between'
+      className='relative flex min-h-screen flex-col overflow-hidden pt-22 lg:pt-25'
     >
       {/* Background Image */}
       <div className='absolute inset-0 -z-10'>
@@ -35,49 +35,26 @@ export default function Hero() {
           alt='Hero Background'
           fill
           priority
-          className='object-cover object-center opacity-90'
+          className='object-cover object-center opacity-100'
         />
       </div>
 
-      <Container className='relative flex-1 flex flex-col justify-between h-full'>
-        {/* ================= DESKTOP LAYOUT (lg:grid) ================= */}
-        <div className='hidden lg:grid grid-cols-12 gap-6 items-end relative flex-1 pt-12 pb-6'>
-          {/* Kolom Kiri: Tech Stack (Atas) & Bio (Bawah) */}
-          <div className='col-span-3 flex flex-col justify-between h-full z-10 py-4'>
-            <div>
-              <TechStackPill items={techStack} />
-            </div>
-            <div className='mb-20'>
-              <HeroBio />
-            </div>
+      <Container className='relative flex flex-1 flex-col'>
+        <div className='flex flex-1 flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-6'>
+          {/* Kiri: Tech stack (atas) + Bio (bawah). Di mobile hanya Bio yang tampil, paling atas */}
+          <div className='contents lg:relative lg:z-30 lg:flex lg:flex-col lg:justify-between lg:pb-[clamp(80px,13vw,190px)]'>
+            <TechStackPill items={techStack} />
+            <HeroBio />
           </div>
 
-          {/* Kolom Tengah: Badge & Foto/Teks Utama (Center) */}
-          <div className='col-span-6 flex flex-col items-center justify-end h-full relative z-0'>
-            {/* Badge posisi absolute di atas teks besar */}
-
-            <div className='w-full flex justify-center items-end'>
-              <HeroCenterContent />
-            </div>
-          </div>
-
-          {/* Kolom Kanan: Stats & Tombol Kontak */}
-          <div className='col-span-3 flex flex-col justify-center items-center h-full z-10 py-4 space-y-6'>
-            <HeroStats stats={stats} />
-          </div>
-        </div>
-
-        {/* ================= MOBILE LAYOUT (lg:hidden) ================= */}
-        <div className='flex lg:hidden flex-col gap-8 pt-4 pb-8'>
-          {/* 1. Bio di paling atas */}
-          <HeroBio />
-
-          {/* 2. Stats dalam format 2 kolom (2x2 grid) */}
-          <HeroStats stats={stats} />
-
-          {/* 3. Badge & Hero Center Content di paling bawah */}
-          <div className='flex flex-col items-center justify-center pt-4 relative'>
+          {/* Tengah: badge + teks besar + foto (paling bawah di mobile) */}
+          <div className='order-3 lg:order-0 lg:self-end lg:translate-y-20'>
             <HeroCenterContent />
+          </div>
+
+          {/* Kanan: stats + tombol (di mobile berada setelah bio) */}
+          <div className='order-2 lg:relative lg:z-30 lg:order-0 lg:self-center lg:justify-self-end'>
+            <HeroStats stats={stats} />
           </div>
         </div>
       </Container>

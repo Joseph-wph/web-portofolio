@@ -61,7 +61,7 @@ export function ContactForm() {
             times: [0, 1, 1],
             ease: 'easeOut',
           }}
-          className='absolute -top-40 left-1/2 z-0 h-38.75 w-48 -translate-x-1/2'
+          className='absolute -top-40 left-1/2 z-0 h-38 w-48 -translate-x-1/2'
         >
           <Image
             src='/assets/icons/gbr2.png'

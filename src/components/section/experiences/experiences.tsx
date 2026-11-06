@@ -4,27 +4,30 @@ import ExperiencesPart from './experiencesPart';
 
 export default function Experiences() {
   return (
-    <section className='w-full bg-[#0B0F17] text-white py-16 sm:py-24'>
+    <section
+      id='experiences'
+      className='w-full scroll-mt-28 bg-[#0B0F17] py-16 text-white sm:py-24'
+    >
       <Container>
         <div className='flex flex-col gap-8'>
           {/* Section Header: Judul Kiri & Sub-Deskripsi Kanan */}
-          <div className='grid grid-cols-1 lg:grid-cols-12 gap-6 items-start'>
+          <div className='grid grid-cols-1 items-start gap-6 lg:grid-cols-12 lg:items-end'>
             <div className='lg:col-span-6'>
               <SectionHeader
                 alignment='left'
                 title={
                   <>
-                    Experiences That <br className='hidden sm:inline' />
-                    <span className='text-[#EBB456]'>Shaped Me</span>!
+                    Experiences That <br className='hidden sm:block' />
+                    <span className='text-[#EBB456]'>Shaped Me!</span>
                   </>
                 }
-                className='w-full p-0 m-0'
-                titleClassName='text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight'
+                className='m-0 w-full p-0'
+                titleClassName='text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl'
               />
             </div>
 
-            <div className='lg:col-span-6 flex lg:justify-end'>
-              <p className='text-sm sm:text-base text-slate-300 max-w-md leading-relaxed lg:text-left'>
+            <div className='flex lg:col-span-6 lg:justify-end'>
+              <p className='max-w-md text-sm leading-relaxed text-slate-300 sm:text-base lg:text-left'>
                 From startups to side projects, every step has been a chance to
                 learn, build, and level up.
               </p>
